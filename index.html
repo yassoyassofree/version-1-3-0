@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unblocker - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="floating-particles" id="particles"></div>
+    
+    <div class="container">
+        <nav class="navbar">
+            <h1>Unblocker</h1>
+            <div class="nav-links">
+                <a href="welcome.html">Welcome</a>
+                <a href="chat.html">Chat</a>
+                <a href="unblockers.html">Unblockers</a>
+                <a href="sound board.html">Sound Board</a>
+            </div>
+        </nav>
+        <div id="password-protection" class="password-overlay">
+            <div class="password-container">
+                <h2>Enter Password</h2>
+                <div class="keypad">
+                    <input type="password" id="password-input" readonly>
+                    <div class="keypad-buttons">
+                        <button onclick="enterDigit(1)">1</button>
+                        <button onclick="enterDigit(2)">2</button>
+                        <button onclick="enterDigit(3)">3</button>
+                        <button onclick="enterDigit(4)">4</button>
+                        <button onclick="enterDigit(5)">5</button>
+                        <button onclick="enterDigit(6)">6</button>
+                        <button onclick="enterDigit(7)">7</button>
+                        <button onclick="enterDigit(8)">8</button>
+                        <button onclick="enterDigit(9)">9</button>
+                        <button onclick="clearInput()">C</button>
+                        <button onclick="enterDigit(0)">0</button>
+                        <button onclick="submitPassword()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const correctPassword = "402010";
+
+            function enterDigit(digit) {
+                const input = document.getElementById("password-input");
+                if (input.value.length < 6) {
+                    input.value += digit;
+                }
+            }
+
+            function clearInput() {
+                document.getElementById("password-input").value = "";
+            }
+
+            function submitPassword() {
+                const input = document.getElementById("password-input").value;
+                if (input === correctPassword) {
+                    document.getElementById("password-protection").style.display = "none";
+                } else {
+                    alert("Incorrect password. Try again.");
+                    clearInput();
+                }
+            }
+
+            // Prevent access until password is entered
+            document.body.onload = () => {
+                document.getElementById("password-protection").style.display = "flex";
+            };
+        </script>
+
+        <style>
+            .password-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            }
+
+            .password-container {
+                background: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: center;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .keypad {
+                margin-top: 10px;
+            }
+
+            #password-input {
+                width: 100%;
+                padding: 10px;
+                font-size: 18px;
+                text-align: center;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .keypad-buttons {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+
+            .keypad-buttons button {
+                padding: 15px;
+                font-size: 18px;
+                border: none;
+                border-radius: 5px;
+                background: #007bff;
+                color: #fff;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+            .keypad-buttons button:hover {
+                background: #0056b3;
+            }
+        </style>
+        <div class="content">
+            <h2>Welcome to Unblocker</h2>
+            <p>Your all-in-one educational platform.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Educational Tools</h3>
+                    <p>Access your favorite educational platforms:</p>
+                    <a href="ixl.html" class="btn">IXL</a>
+                    <a href="quizizz.html" class="btn">Quizizz</a>
+                    <a href="blooket.html" class="btn">Blooket</a>
+                </div>
+                
+                <div class="card">
+                    <h3>Features</h3>
+                    <ul>
+                        <li>Easy navigation</li>
+                        <li>Quick access to tools</li>
+                        <li>Modern interface</li>
+                        <li>Responsive design</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Quick Links</h3>
+                    <a href="cheats.html" class="btn">Cheats</a>
+                    <a href="chat.html" class="btn">Chat</a>
+                    <a href="sound board.html" class="btn">Sound Board</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+</body>
+</html>

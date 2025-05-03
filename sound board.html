@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unblocker - Sound Board</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .sound-card {
+            background: var(--light-bg);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .sound-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            background: var(--primary-color);
+        }
+
+        .sound-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .sound-name {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .volume-control {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .category-filter {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .category-button {
+            padding: 8px 15px;
+            background: var(--light-bg);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-button.active {
+            background: var(--primary-color);
+        }
+
+        .category-button:hover {
+            background: var(--accent-color);
+        }
+
+        .search-container {
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            background: var(--light-bg);
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles" id="particles"></div>
+    
+    <div class="container">
+        <nav class="navbar">
+            <h1>Sound Board</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="welcome.html">Welcome</a>
+                <a href="chat.html">Chat</a>
+                <a href="unblockers.html">Unblockers</a>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search sounds...">
+            </div>
+
+            <div class="category-filter">
+                <button class="category-button active">All</button>
+                <button class="category-button">Funny</button>
+                <button class="category-button">Music</button>
+                <button class="category-button">Effects</button>
+            </div>
+
+            <div class="grid">
+                <div class="sound-card" onclick="playSound('iPhone Notification Sound Effect.mp3')">
+                    <div class="sound-icon">🔔</div>
+                    <h3 class="sound-name">iPhone Notification</h3>
+                    <input type="range" class="volume-control" min="0" max="100" value="50">
+                </div>
+
+                <div class="sound-card" onclick="playSound('IPhone original ringtone.mp3')">
+                    <div class="sound-icon">📱</div>
+                    <h3 class="sound-name">iPhone Ringtone</h3>
+                    <input type="range" class="volume-control" min="0" max="100" value="50">
+                </div>
+
+                <div class="sound-card" onclick="playSound('yeah boy sound effect.mp3')">
+                    <div class="sound-icon">🎉</div>
+                    <h3 class="sound-name">Yeah Boy</h3>
+                    <input type="range" class="volume-control" min="0" max="100" value="50">
+                </div>
+
+                <div class="sound-card" onclick="playSound('Bruh sound effect.mp3')">
+                    <div class="sound-icon">😆</div>
+                    <h3 class="sound-name">Bruh</h3>
+                    <input type="range" class="volume-control" min="0" max="100" value="50">
+                </div>
+
+                <div class="sound-card" onclick="playSound('Yamete Kudasai ahh - Sound Effect (Anime).mp3')">
+                    <div class="sound-icon">🎭</div>
+                    <h3 class="sound-name">Anime Sound</h3>
+                    <input type="range" class="volume-control" min="0" max="100" value="50">
+                </div>
+
+                <div class="sound-card" onclick="playSound('IXL  Correct!.mp3')">
+                    <div class="sound-icon">✅</div>
+                    <h3 class="sound-name">IXL Correct</h3>
+                    <input type="range" class="volume-control" min="0" max="100" value="50">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        // Sound board functionality
+        const sounds = {
+            'iPhone Notification Sound Effect.mp3': new Audio('iPhone Notification Sound Effect.mp3'),
+            'IPhone original ringtone.mp3': new Audio('IPhone original ringtone.mp3'),
+            'yeah boy sound effect.mp3': new Audio('yeah boy sound effect.mp3'),
+            'Bruh sound effect.mp3': new Audio('Bruh sound effect.mp3'),
+            'Yamete Kudasai ahh - Sound Effect (Anime).mp3': new Audio('Yamete Kudasai ahh - Sound Effect (Anime).mp3'),
+            'IXL  Correct!.mp3': new Audio('IXL  Correct!.mp3')
+        };
+
+        function playSound(soundFile) {
+            const sound = sounds[soundFile];
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play();
+            }
+        }
+
+        // Volume control
+        document.querySelectorAll('.volume-control').forEach(control => {
+            control.addEventListener('input', function() {
+                const soundCard = this.closest('.sound-card');
+                const soundName = soundCard.querySelector('.sound-name').textContent;
+                const soundFile = Object.keys(sounds).find(file => 
+                    file.includes(soundName.replace(/\s+/g, ''))
+                );
+                if (soundFile) {
+                    sounds[soundFile].volume = this.value / 100;
+                }
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const soundCards = document.querySelectorAll('.sound-card');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            soundCards.forEach(card => {
+                const name = card.querySelector('.sound-name').textContent.toLowerCase();
+                if (name.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Category filter functionality
+        const categoryButtons = document.querySelectorAll('.category-button');
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                // Add category filtering logic here
+            });
+        });
+    </script>
+</body>
+</html>
